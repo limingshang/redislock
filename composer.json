@@ -1,0 +1,22 @@
+{
+    "name": "limslock/redislock",
+    "description": "redis lock",
+    "type": "libary",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "limingshang",
+            "email": "18203232363@163.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php":">=5.4",
+        "predis/predis": "^1.1"
+    },
+    "autoload":{
+        "psr-4":{
+            "Lock\\":"src/"
+        }
+    }
+}
