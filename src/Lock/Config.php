@@ -5,7 +5,7 @@
  * Time:       ： 上午11:07
  * Effect      ：
  */
-namespace redislock\Lock;
+namespace Lock\Lock;
 
 class Config
 {

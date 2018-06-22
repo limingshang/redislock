@@ -5,9 +5,9 @@
  * Time:       ： 下午6:32
  * Effect      ： 并发操作
  */
-namespace redislock;
+namespace Lock;
 use Predis\Client;
-use redislock\Lock\Config;
+use Lock\Lock\Config;
 
 class Lock
 {
