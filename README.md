@@ -4,7 +4,8 @@
     基于predis类
     如需自己安装predis请执行
     composer require predis/predis
-##单队列调用
+## 单队列调用
+
     Lock::lock(
         function ($redis){
             echo "hello word!";
@@ -14,7 +15,9 @@
         50,
         3
     );
-##多队列调用
+    
+## 多队列调用
+
     Lock::queueLock(
         function ($redis){
             echo "hello word!";
