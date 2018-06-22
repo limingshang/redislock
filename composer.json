@@ -1,6 +1,6 @@
 {
     "name": "limslock/redislock",
-    "description": "redis lock",
+    "description": "redis lock https://github.com/zhaocong6/lock 根据大佬修车工修改完成",
     "type": "libary",
     "license": "MIT",
     "authors": [
@@ -16,7 +16,8 @@
     },
     "autoload":{
         "psr-4":{
-            "Lock\\":"src/"
+            "Lock\\":"src/",
+            "Lock\\Lock\\":"src/Lock"
         }
     }
 }

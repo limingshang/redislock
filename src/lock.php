@@ -7,6 +7,7 @@
  */
 namespace redislock;
 use Predis\Client;
+use redislock\Lock\Config;
 
 class Lock
 {
@@ -26,8 +27,8 @@ class Lock
      * Lock constructor.
      * 事例话需要用到的变量
      */
-    public function __construct(){
-        $this->config=config('lockredis');
+    public function __construct($config=[],$arguments=[]){
+        $this->config=Config::returnConfig();
         $this->redis=new Client($this->config);
     }
 
@@ -36,7 +37,7 @@ class Lock
      * Create   User: lims
      * Create   Time: 2018/6/21 下午3:48
      * ---------------------------------
-     * @param $callbacks    执行操作函数
+     * @param $callbacks     执行操作函数
      * @param $lock_value   传递过来的值
      * @param $expiration   等待时间隔
      */
@@ -58,7 +59,7 @@ class Lock
      * Create   User: lims
      * Create   Time: 2018/6/21 下午4:21
      * ---------------------------------
-     * @param $callbacks        执行操作函数
+     * @param $callbacks         执行操作函数
      * @param $lock_value       传递过来的值
      * @param int $expiration   等待时间隔
      * @param $max_queue        等待执行的队列最大等待量
@@ -75,13 +76,11 @@ class Lock
             if($this->redis->set($this->queue_name,$this->rand_member,"nx",'ex',$expiration)){
                 $status=$callback($this->redis);
                 self::delQueueLock();        //执行完毕，执行删除队列操作，防止队列锁
+                self::delQueueWait();        //执行完毕，执行删除队列操作，防止队列锁
                 return $status;
                 break;
             }
         }
-
-    }
-    public function handleQueue(){
 
     }
     /**
@@ -89,7 +88,7 @@ class Lock
      * Create   User: lims
      * Create   Time: 2018/6/21 下午5:25
      * ---------------------------------
-     * @param $callbacks
+     * @param $callback
      * @param $queue_value
      */
     public function initQueueList($callback,$queue_value){
@@ -169,14 +168,19 @@ class Lock
         else
             Throw new \Exception('参数错误');
     }
-    public function index(){
-        self::queueLock(
-            function ($redis){
-                echo "hello word!";
-                sleep(5);
-            },
-            "hello",
-            50
-        );
+
+    /**
+     * Function Name: delQueueWait
+     * Create   User: lims
+     * Create   Time: 2018/6/22 上午11:01
+     * ---------------------------------
+     * @return bool
+     */
+    public function delQueueWait(){
+
+        if($this->redis->get($this->queue_wait_name)<=0)
+            return true;
+        else
+            return $this->redis->decr($this->queue_wait_name);
     }
 }
