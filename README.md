@@ -4,6 +4,7 @@
     基于predis类
     如需自己安装predis请执行
     composer require predis/predis
+    tp5扩展，如需其他请自行配置Config.php
 ## 单队列调用  每次只执行一个消息，多余消息将直接返回队列被抛出异常：单队列已被占用！请稍后
 
     $lock=new Lock();
