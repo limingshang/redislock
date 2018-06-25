@@ -1,6 +1,9 @@
 # redislock
 
     根据大佬修车工写的一个渣渣类
+    安装地址
+    composer require limslock/lock
+    
     基于predis类
     如需自己安装predis请执行
     composer require predis/predis
