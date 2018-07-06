@@ -1,6 +1,7 @@
 # redislock
 
     根据大佬修车工写的一个渣渣类
+    基于tp5  如果其他框架请修改config.php配置
     安装地址
     composer require limslock/lock
     
